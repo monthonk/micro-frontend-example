@@ -1,25 +1,19 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { KeycloakProvider } from '@react-keycloak/web';
+import Keycloak from 'keycloak-js';
+import MainPage from './MainPage';
+
+const API_URL = process.env.REACT_APP_API_HOST + '/api';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={`${process.env.REACT_APP_CONTENT_HOST}${logo}`} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <KeycloakProvider
+      initConfig={{ onLoad: 'login-required' }}
+      keycloak={Keycloak(`${API_URL}/config/keycloak`)}
+      isLoadingCheck={keycloak => !keycloak.authenticated}>
+        <MainPage />
+    </KeycloakProvider>
   );
 }
 
