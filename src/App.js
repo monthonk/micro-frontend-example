@@ -7,9 +7,12 @@ import MainPage from './MainPage';
 const API_URL = process.env.REACT_APP_API_HOST + '/api';
 
 function App() {
+  const token = localStorage.getItem('kc-token');
+  const refreshToken = localStorage.getItem('kc-refreshToken');
+
   return (
     <KeycloakProvider
-      initConfig={{ onLoad: 'login-required' }}
+      initConfig={{ onLoad: 'check-sso', token, refreshToken  }}
       keycloak={Keycloak(`${API_URL}/config/keycloak`)}
       isLoadingCheck={keycloak => !keycloak.authenticated}>
         <MainPage />
