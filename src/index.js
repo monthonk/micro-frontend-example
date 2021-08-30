@@ -1,13 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import * as serviceWorker from './serviceWorker';
+import WCRoot from './WCRoot';
+
+customElements.define('wc-root', WCRoot);
 
 // render micro frontend function
 window.rendercreatereactapp = (containerId, history) => {
   ReactDOM.render(
-    <App history={history}/>,
+    <wc-root />,
     document.getElementById(containerId)
   );
   serviceWorker.unregister();
@@ -20,7 +22,7 @@ window.unmountcreatereactapp = containerId => {
 
 // Mount to root if it is not a micro frontend
 if (!document.getElementById('createreactapp-container')) {
-  ReactDOM.render(<App />, document.getElementById('root'));
+  ReactDOM.render(<wc-root />, document.getElementById('root'));
 }
 
 // If you want your app to work offline and load faster, you can change
