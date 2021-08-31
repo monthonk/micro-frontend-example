@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import { KeycloakProvider } from '@react-keycloak/web';
 import Keycloak from 'keycloak-js';
 import MainPage from './MainPage';
